@@ -2,7 +2,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import torch
 import os
 
-# Set tokenizers parallelism to avoid deadlocks
+# Set tokenizer parallelism to avoid deadlocks
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 class LLMHandler:
@@ -67,7 +67,7 @@ class LLMHandler:
                 temperature=0.7,  # Adjusted for better balance between creativity and coherence
                 top_p=0.95,  # Slightly increased nucleus sampling for better quality
                 top_k=50,  # Add top-k sampling for more focused responses
-                do_sample=True,
+                do_sample=True, # Enable sampling for more diverse responses
                 repetition_penalty=1.3,  # Increased to further prevent repetition
                 no_repeat_ngram_size=3  # Prevent repetition of 3-grams
             )
