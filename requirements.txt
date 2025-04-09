@@ -1,23 +1,12 @@
-# Core dependencies
-transformers==4.30.2
-torch==2.1.2
-sentence-transformers==2.2.2
-huggingface-hub==0.16.4
-accelerate==0.21.0
-
-# RAG and document processing
-faiss-cpu==1.7.4
-langchain==0.1.0
-python-dotenv==1.0.0
-
-# Utilities
-numpy==1.26.2
-pandas==2.1.4
-
-# API and interface
-fastapi==0.109.0
-uvicorn==0.25.0
-
-# Document handling
-pyPDF2==3.0.1
-docx2txt==0.8
+transformers>=4.36.2
+torch>=2.1.2
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+langchain>=0.1.0
+python-dotenv>=1.0.0
+numpy>=1.26.2
+pandas>=2.1.4
+fastapi>=0.109.0
+uvicorn>=0.25.0
+pyPDF2>=3.0.1
+docx2txt>=0.8

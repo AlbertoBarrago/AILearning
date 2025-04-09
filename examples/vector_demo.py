@@ -25,7 +25,7 @@ def demonstrate_vector_embeddings():
         print(f"Processed: {processed}")
         # Show vector representation
         vector = vector_store.get_embedding(processed)
-        print(f"Vector (shape={vector.shape}, first 5 dimensions): {vector[:5]}\n")
+        print(f"Vector (shape={vector.shape[0]}, first 5 dimensions): {vector[:5]}\n")
     
     # Add texts to vector store and show vector details
     print("Converting texts to vectors...")
@@ -35,7 +35,7 @@ def demonstrate_vector_embeddings():
     query = "How do machines learn?"
     print(f"\nPerforming similarity search for: '{query}'")
     query_vector = vector_store.get_embedding(query)
-    print(f"Query vector shape: {query_vector.shape}")
+    print(f"Query vector shape: {query_vector.shape[0]}")
     print(f"Query vector first 5 dimensions: {query_vector[:5]}\n")
     
     similar_texts = vector_store.similarity_search(query, k=2)

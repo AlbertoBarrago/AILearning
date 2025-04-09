@@ -1,6 +1,8 @@
 from src.llm.model_handler import LLMHandler
 from src.rag.rag_engine import RAGEngine
+
 import os
+
 
 
 def demonstrate_llm():

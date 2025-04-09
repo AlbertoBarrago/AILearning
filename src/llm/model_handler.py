@@ -69,7 +69,6 @@ class LLMHandler:
                 top_k=50,  # Add top-k sampling for more focused responses
                 do_sample=True,
                 repetition_penalty=1.3,  # Increased to further prevent repetition
-                length_penalty=1.2,  # Encourage slightly longer responses
                 no_repeat_ngram_size=3  # Prevent repetition of 3-grams
             )
             response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)

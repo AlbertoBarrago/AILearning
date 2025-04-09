@@ -34,6 +34,11 @@ This project is designed to help you learn fundamental concepts of Artificial In
    ```bash
    pip install -r requirements.txt
    ```
+   or setup.py install
+
+   ```bash
+   pip setup.py install
+   ```
 
 ## Learning Path
 

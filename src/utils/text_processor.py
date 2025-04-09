@@ -8,7 +8,8 @@ class TextProcessor:
         """Initialize the text processor."""
         pass
 
-    def preprocess(self, text: str) -> str:
+    @staticmethod
+    def preprocess(text: str) -> str:
         """Preprocess the input text.
 
         Args:
@@ -28,7 +29,8 @@ class TextProcessor:
         
         return text.strip()
 
-    def tokenize(self, text: str) -> List[str]:
+    @staticmethod
+    def tokenize(text: str) -> List[str]:
         """Split text into tokens.
 
         Args:
