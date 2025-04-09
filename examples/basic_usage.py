@@ -1,5 +1,7 @@
 from src.llm.model_handler import LLMHandler
 from src.rag.rag_engine import RAGEngine
+import os
+
 
 def demonstrate_llm():
     print("\n=== LLM Demo ===")
@@ -17,15 +19,21 @@ def demonstrate_llm():
 
 def demonstrate_rag():
     print("\n=== RAG Demo ===")
+
     # Initialize RAG engine
     rag = RAGEngine()
     
-    # Add some sample documents
-    documents = [
-        "Artificial Intelligence (AI) is the simulation of human intelligence by machines.",
-        "Machine Learning is a subset of AI that enables systems to learn from data.",
-        "Deep Learning is a type of machine learning based on artificial neural networks."
-    ]
+    # Read documents from the data folder
+    data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
+    documents = []
+    
+    for filename in os.listdir(data_dir):
+        if filename.endswith(('.txt', '.md', '.pdf')):  # Add more extensions if needed
+            file_path = os.path.join(data_dir, filename)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                documents.append(f.read())
+    
+    print(f"Loading {len(documents)} documents from data folder...")
     
     print("Adding sample documents...")
     rag.add_documents(documents)

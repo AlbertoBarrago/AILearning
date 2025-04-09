@@ -8,7 +8,7 @@ def demonstrate_vector_embeddings():
     vector_store = VectorStore()
     text_processor = TextProcessor()
     
-    # Sample texts for demonstration
+    # Sample texts for demonstration, custom in base of your own
     texts = [
         "Artificial Intelligence is revolutionizing technology",
         "Machine learning algorithms learn from data",
