@@ -1,5 +1,7 @@
 # AI Learning Project
 
+[![Run Tests](https://github.com/AlbertoBarrago/AI_Learning/actions/workflows/run-tests.yml/badge.svg)](https://github.com/AlbertoBarrago/AI_Learning/actions/workflows/run-tests.yml)
+
 This project is designed to help you learn fundamental concepts of Artificial Intelligence, focusing on Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG). The project provides hands-on experience with popular AI tools and frameworks.
 
 ## Features
