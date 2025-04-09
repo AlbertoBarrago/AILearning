@@ -30,14 +30,29 @@ class VectorStore:
         Returns:
             List of similar texts
         """
-        query_embedding = self.model.encode([query])[0]
+        query_embedding = self.model.encode([query])[0]  # Should be a 1D array
+
+        # Ensure query_embedding is the right shape
+        if len(query_embedding.shape) > 1:
+            query_embedding = query_embedding.flatten()
+
         similarities = []
-        
+
         for i, embedding in enumerate(self.embeddings):
+            # Ensure embedding is the right shape
+            if len(embedding.shape) > 1:
+                embedding = embedding.flatten()
+
+            # Make sure both have the same dimensions
+            if query_embedding.shape != embedding.shape:
+                # Either resize or log an error
+                print(f"Shape mismatch: query={query_embedding.shape}, stored={embedding.shape}")
+                continue
+
             similarity = np.dot(query_embedding, embedding) / \
-                        (np.linalg.norm(query_embedding) * np.linalg.norm(embedding))
+                         (np.linalg.norm(query_embedding) * np.linalg.norm(embedding))
             similarities.append((similarity, i))
-        
+
         similarities.sort(reverse=True)
         return [self.texts[idx] for _, idx in similarities[:k]]
 

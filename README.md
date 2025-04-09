@@ -18,8 +18,8 @@ This project is designed to help you learn fundamental concepts of Artificial In
 │   ├── vectorstore/    # Vector storage management
 │   └── utils/          # Utility functions
 ├── examples/           # Example scripts and notebooks
-├── data/              # Sample data for testing
-└── tests/             # Unit tests
+├── data/               # Sample data for testing
+└── tests/              # Unit tests
 ```
 
 ## Setup
@@ -61,6 +61,13 @@ This project is designed to help you learn fundamental concepts of Artificial In
 ## Usage
 
 Check the `examples/` directory for practical demonstrations of each concept.
+
+## Testing
+
+Run unit tests:
+```bash
+python -m unittest discover tests/
+```
 
 ## Contributing
 

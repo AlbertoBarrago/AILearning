@@ -48,22 +48,25 @@ class RAGEngine:
         Returns:
             List[Dict]: List of relevant documents with scores
         """
+        if self.index is None or len(self.documents) == 0:
+            return []
+
         # Generate query embedding
-        query_embedding = self.embedding_model.encode([query])
+        query_embedding = self.embedding_model.encode([query])[0]
         
         # Search in FAISS index
-        distances, indices = self.index.search(
-            np.array(query_embedding).astype('float32'), k
-        )
-
+        distances, indices = self.index.search(np.array([query_embedding]).astype('float32'), k)
+        
         results = []
-        for i, (dist, idx) in enumerate(zip(distances[0], indices[0])):
-            if idx < len(self.documents):
+        for i, idx in enumerate(indices[0]):
+            # Convert idx to int to ensure proper comparison
+            idx_int = int(idx)
+            if idx_int < len(self.documents):
                 results.append({
-                    'document': self.documents[idx],
-                    'score': float(dist)
+                    "document": self.documents[idx_int],
+                    "score": float(distances[0][i])
                 })
-
+        
         return results
 
     def query(self, question: str, k: int = 3) -> str:
@@ -105,10 +108,10 @@ Answer:"""
         """
         Get statistics about the RAG system
         Returns:
-            Dict: System statistics
+            Dict: Statistics about the system
         """
         return {
-            "num_documents": len(self.documents),
-            "embedding_model": self.embedding_model.get_sentence_embedding_dimension(),
+            "document_count": len(self.documents),
+            "embedding_model": self.dimension,
             "index_initialized": self.index is not None
         }

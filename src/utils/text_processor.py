@@ -20,13 +20,16 @@ class TextProcessor:
         """
         # Convert to lowercase
         text = text.lower()
-        
+
         # Remove extra whitespace
         text = re.sub(r'\s+', ' ', text)
-        
-        # Remove special characters but keep basic punctuation
-        text = re.sub(r'[^\w\s.,!?-]', '', text)
-        
+
+        # Remove special characters
+        text = re.sub(r'[^a-z0-9\s:,.!?-]', '', text)
+
+        # Remove extra spaces
+        text = ' '.join(text.split())
+
         return text.strip()
 
     @staticmethod
@@ -40,4 +43,4 @@ class TextProcessor:
             List of tokens
         """
         # Simple word-based tokenization
-        return text.split()
+        return text.split(' ')
