@@ -1,0 +1,16 @@
+# Sample Documents for RAG Testing
+
+Document 1: Understanding Artificial Intelligence
+Artificial Intelligence (AI) is a broad field of computer science focused on creating intelligent machines that can perform tasks that typically require human intelligence. These tasks include learning, reasoning, problem-solving, understanding language, and perception. AI encompasses various approaches and technologies working together to create intelligent behavior in machines.
+
+Document 2: The AI and Machine Learning Relationship
+Machine Learning (ML) is a fundamental subset of Artificial Intelligence that focuses on developing systems that can learn from data and improve through experience. The relationship between AI and ML is hierarchical - ML is one of the primary approaches used to achieve AI capabilities. While AI is the broader goal of creating intelligent machines, ML is the specific technique that enables machines to learn patterns from data and make decisions without explicit programming.
+
+Document 3: Neural Networks
+Neural networks are computing systems inspired by biological neural networks in animal brains. They consist of artificial neurons organized in layers that can learn patterns in data through a process called training. Deep learning uses multiple layers of neural networks.
+
+Document 4: Transformer Architecture
+The transformer architecture, introduced in the paper "Attention Is All You Need," revolutionized natural language processing. It uses self-attention mechanisms to process sequential data, allowing models to consider the context of each word in relation to all other words in a sequence.
+
+Document 5: Vector Embeddings
+Vector embeddings are numerical representations of words or documents in a high-dimensional space. These representations capture semantic relationships between words, allowing machines to understand similarities and relationships between different pieces of text.
