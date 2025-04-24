@@ -6,7 +6,7 @@ class TestRAGEngine(unittest.TestCase):
 
     def setUp(self):
         # Import inside the test to avoid circular import issues
-        from src.rag.rag_engine import RAGEngine
+        from src.utils.rag.rag_engine import RAGEngine
 
         # Create mocks
         self.mock_index = MagicMock()

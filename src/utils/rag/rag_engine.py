@@ -2,7 +2,8 @@ from typing import List, Dict, Any
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
-from ..llm.model_handler import LLMHandler
+from src.utils.llm.model_handler import LLMHandler
+
 
 class RAGEngine:
     def __init__(self, embedding_model="all-MiniLM-L6-v2"):
@@ -34,7 +35,7 @@ class RAGEngine:
 
         # Generate embeddings for documents
         embeddings = self.embedding_model.encode(documents)
-        
+
         # Add to FAISS index
         self.index.add(np.array(embeddings).astype('float32'))
         self.documents.extend(documents)
@@ -53,10 +54,10 @@ class RAGEngine:
 
         # Generate query embedding
         query_embedding = self.embedding_model.encode([query])[0]
-        
+
         # Search in FAISS index
         distances, indices = self.index.search(np.array([query_embedding]).astype('float32'), k)
-        
+
         results = []
         for i, idx in enumerate(indices[0]):
             # Convert idx to int to ensure proper comparison
@@ -66,7 +67,7 @@ class RAGEngine:
                     "document": self.documents[idx_int],
                     "score": float(distances[0][i])
                 })
-        
+
         return results
 
     def query(self, question: str, k: int = 3) -> str:
@@ -80,28 +81,28 @@ class RAGEngine:
         """
         # Retrieve relevant documents
         relevant_docs = self.search(question, k)
-        
+
         # Process and structure retrieved context
-        formatted_context = "\n".join([f"Reference {i+1}:\n{doc['document']}" for i, doc in enumerate(relevant_docs)])
-        
+        formatted_context = "\n".join([f"Reference {i + 1}:\n{doc['document']}" for i, doc in enumerate(relevant_docs)])
+
         # Construct enhanced prompt with better instructions
         prompt = f"""Based on the following references, provide a comprehensive and accurate answer.
 
-References:
-{formatted_context}
-
-Question: {question}
-
-Provide a detailed answer that:
-1. Directly addresses the question
-2. Uses information from the references
-3. Explains concepts clearly and thoroughly
-
-Answer:"""
+        References:
+        {formatted_context}
+        
+        Question: {question}
+        
+        Provide a detailed answer that:
+        1. Directly addresses the question
+        2. Uses information from the references
+        3. Explains concepts clearly and thoroughly
+        
+        Answer:"""
 
         # Generate answer using LLM
         response = self.llm.generate_response(prompt)
-        
+
         return response
 
     def get_stats(self) -> Dict[str, Any]:

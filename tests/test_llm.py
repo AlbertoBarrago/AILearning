@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
 import torch
-from src.llm.model_handler import LLMHandler
+from src.utils.llm import LLMHandler
 
 
 class TestLLMHandler(unittest.TestCase):

@@ -56,15 +56,14 @@ class LLMHandler:
                 return "Error: Model not loaded"
 
         try:
-            # Use the enhanced prompt for better context
             inputs = self.tokenizer(enhanced_prompt, return_tensors="pt", padding=True, truncation=True).to(self.device)
             outputs = self.model.generate(
-                input_ids=inputs.input_ids,
-                attention_mask=inputs.attention_mask,
+                input_ids=inputs.input_ids, # Added input_ids
+                attention_mask=inputs.attention_mask, # Added attention mask
                 max_length=max(500, max_length),  # Further increased for more comprehensive responses
                 min_length=50,  # Ensure minimum response length
-                num_return_sequences=1,
-                temperature=0.7,  # Adjusted for better balance between creativity and coherence
+                num_return_sequences=1, # Generate a single response
+                temperature=0.7,  # Adjusted for a better balance between creativity and coherence
                 top_p=0.95,  # Slightly increased nucleus sampling for better quality
                 top_k=50,  # Add top-k sampling for more focused responses
                 do_sample=True, # Enable sampling for more diverse responses
