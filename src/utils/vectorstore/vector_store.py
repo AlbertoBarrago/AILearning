@@ -1,6 +1,6 @@
 """Vector Store for handling embeddings and storage operations."""
 
-from typing import List, Dict, Any
+from typing import List
 import numpy as np
 from sentence_transformers import SentenceTransformer
 

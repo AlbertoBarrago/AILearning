@@ -1,13 +1,13 @@
 import unittest
 from unittest.mock import patch, MagicMock
 import torch
-from src.utils.llm import LLMHandler
+from src.utils import LLMHandler
 
 
 class TestLLMHandler(unittest.TestCase):
 
-    @patch('src.llm.model_handler.AutoTokenizer')
-    @patch('src.llm.model_handler.AutoModelForSeq2SeqLM')
+    @patch('src.utils.llm.model_handler.AutoTokenizer')
+    @patch('src.utils.llm.model_handler.AutoModelForSeq2SeqLM')
     def test_init_and_load_model(self, mock_model, mock_tokenizer):
         # Setup mocks
         mock_tokenizer.from_pretrained.return_value = MagicMock()
@@ -22,8 +22,8 @@ class TestLLMHandler(unittest.TestCase):
         mock_tokenizer.from_pretrained.assert_called_once_with("test-model")
         mock_model.from_pretrained.assert_called_once()
 
-    @patch('src.llm.model_handler.AutoTokenizer')
-    @patch('src.llm.model_handler.AutoModelForSeq2SeqLM')
+    @patch('src.utils.llm.model_handler.AutoTokenizer')
+    @patch('src.utils.llm.model_handler.AutoModelForSeq2SeqLM')
     def test_get_model_info(self, mock_model, mock_tokenizer):
         # Setup mocks
         mock_tokenizer.from_pretrained.return_value = MagicMock()
@@ -42,8 +42,8 @@ class TestLLMHandler(unittest.TestCase):
         self.assertIn("model_loaded", info)
         self.assertTrue(info["model_loaded"])
 
-    @patch('src.llm.model_handler.AutoTokenizer')
-    @patch('src.llm.model_handler.AutoModelForSeq2SeqLM')
+    @patch('src.utils.llm.model_handler.AutoTokenizer')
+    @patch('src.utils.llm.model_handler.AutoModelForSeq2SeqLM')
     def test_generate_response(self, mock_model, mock_tokenizer):
         # Setup mocks
         mock_tokenizer.from_pretrained.return_value = MagicMock()

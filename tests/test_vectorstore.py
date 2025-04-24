@@ -1,12 +1,12 @@
 import unittest
 import numpy as np
-from src.utils.vectorstore.vector_store import VectorStore
+from src.utils import VectorStore
 from unittest.mock import patch, MagicMock
 
 
 class TestVectorStore(unittest.TestCase):
 
-    @patch('src.vectorstore.vector_store.SentenceTransformer')
+    @patch('src.utils.vectorstore.vector_store.SentenceTransformer')
     def setUp(self, mock_transformer):
         # Setup mock for SentenceTransformer
         self.mock_model = MagicMock()
