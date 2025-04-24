@@ -1,6 +1,5 @@
 import unittest
-import re
-from src.utils.text_processor import TextProcessor
+from src.utils import TextProcessor
 
 
 class TestTextProcessor(unittest.TestCase):
