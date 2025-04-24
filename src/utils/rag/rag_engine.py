@@ -2,7 +2,7 @@ from typing import List, Dict, Any
 from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
-from ..llm.model_handler import LLMHandler
+from src.utils.llm.model_handler import LLMHandler
 
 
 class RAGEngine:

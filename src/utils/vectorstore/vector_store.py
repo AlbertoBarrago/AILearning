@@ -4,6 +4,7 @@ from typing import List, Dict, Any
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
+
 class VectorStore:
     def __init__(self):
         self.model = SentenceTransformer('all-MiniLM-L6-v2')

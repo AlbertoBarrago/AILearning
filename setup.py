@@ -17,6 +17,11 @@ setup(
         "uvicorn>=0.25.0",
         "pyPDF2>=3.0.1",
         "docx2txt>=0.8",
+        "matplotlib~=3.10.1",
+        "scikit-learn~=1.6.1",
+        "setuptools~=79.0.0",
+        "seaborn>=0.11.0",
+        "scikit-learn>=1.0.0",
     ],
     python_requires=">=3.8",
 )

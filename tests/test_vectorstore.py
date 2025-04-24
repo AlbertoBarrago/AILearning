@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from src.vectorstore.vector_store import VectorStore
+from src.utils.vectorstore.vector_store import VectorStore
 from unittest.mock import patch, MagicMock
 
 

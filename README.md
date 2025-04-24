@@ -2,7 +2,9 @@
 
 [![Run Tests](https://github.com/AlbertoBarrago/AI_Learning/actions/workflows/run-tests.yml/badge.svg)](https://github.com/AlbertoBarrago/AI_Learning/actions/workflows/run-tests.yml)
 
-This project is designed to help you learn fundamental concepts of Artificial Intelligence, focusing on Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG). The project provides hands-on experience with popular AI tools and frameworks.
+This project is designed to help you learn fundamental concepts of Artificial Intelligence,
+focusing on Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG).
+The project provides hands-on experience with popular AI tools and frameworks.
 
 ## Features
 
@@ -10,19 +12,10 @@ This project is designed to help you learn fundamental concepts of Artificial In
 - RAG Implementation for document retrieval and Q&A
 - Vector Store management
 - Document processing capabilities
+- Nural Heat-Map 
 
-## Project Structure
-
-```
-├── src/
-│   ├── llm/            # LLM integration components
-│   ├── rag/            # RAG implementation
-│   ├── vectorstore/    # Vector storage management
-│   └── utils/          # Utility functions
-├── examples/           # Example scripts and notebooks
-├── data/               # Sample data for testing
-└── tests/              # Unit tests
-```
+## Screenshots
+![img.png](img.png)
 
 ## Setup
 
@@ -58,7 +51,6 @@ This project is designed to help you learn fundamental concepts of Artificial In
 3. **Advanced Topics**
    - Custom model training
    - Performance optimization
-   - Deployment strategies
 
 ## Usage
 
