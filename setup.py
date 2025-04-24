@@ -5,7 +5,7 @@ setup(
     version="0.1.0",
     packages=find_packages(),
     install_requires=[
-        "transformers>=4.36.2",
+        "transformers==4.48.0",
         "torch>=2.1.2",
         "sentence-transformers>=2.2.2",
         "faiss-cpu>=1.7.4",
