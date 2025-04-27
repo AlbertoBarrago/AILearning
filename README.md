@@ -12,7 +12,7 @@ The project provides hands-on experience with popular AI tools and frameworks.
 - RAG Implementation for document retrieval and Q&A
 - Vector Store management
 - Document processing capabilities
-- Nural Heat-Map 
+- Neural Heat-Map 
 
 ## Screenshots
 ![img.png](img.png)
