@@ -44,7 +44,7 @@ class RAGEngine:
         """
         Search for relevant documents based on the query
         Args:
-            query (str): Search query
+            query (str): Search a query
             k (int): Number of results to return
         Returns:
             List[Dict]: List of relevant documents with scores
