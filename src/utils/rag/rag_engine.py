@@ -60,7 +60,7 @@ class RAGEngine:
 
         results = []
         for i, idx in enumerate(indices[0]):
-            # Convert idx to int to ensure proper comparison
+            # Convert idx to int to ensure a proper comparison
             idx_int = int(idx)
             if idx_int < len(self.documents):
                 results.append({
