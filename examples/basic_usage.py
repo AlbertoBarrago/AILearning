@@ -1,6 +1,6 @@
 from src.utils import LLMHandler, RAGEngine
-
 import os
+
 
 def demonstrate_llm():
     print("\n=== LLM Demo ===")
@@ -51,7 +51,6 @@ def main():
     
     # Demonstrate LLM capabilities
     demonstrate_llm()
-    
     # Demonstrate RAG capabilities
     demonstrate_rag()
 
