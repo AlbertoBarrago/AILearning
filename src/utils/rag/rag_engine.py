@@ -6,14 +6,15 @@ from src.utils.llm.model_handler import LLMHandler
 
 
 class RAGEngine:
-    def __init__(self, embedding_model="all-MiniLM-L6-v2"):
+    def __init__(self, embedding_model="all-MiniLM-L6-v2", llm_model="google/flan-t5-base"):
         """
         Initialize the RAG engine with embedding model and vector store
         Args:
             embedding_model (str): Name of the sentence transformer model
+            llm_model (str): Name of the LLM model for generation
         """
         self.embedding_model = SentenceTransformer(embedding_model)
-        self.llm = LLMHandler()
+        self.llm = LLMHandler(model_name=llm_model)
         self.index = None
         self.documents = []
         self.dimension = 384  # Default dimension for all-MiniLM-L6-v2
@@ -82,26 +83,21 @@ class RAGEngine:
         # Retrieve relevant documents
         relevant_docs = self.search(question, k)
 
-        # Process and structure retrieved context
-        formatted_context = "\n".join([f"Reference {i + 1}:\n{doc['document']}" for i, doc in enumerate(relevant_docs)])
+        # Process and structure retrieved context - simpler format for smaller models
+        context_parts = [doc['document'] for doc in relevant_docs]
+        formatted_context = " ".join(context_parts)
 
-        # Construct enhanced prompt with better instructions
-        prompt = f"""Based on the following references, provide a comprehensive and accurate answer.
+        # Simplified prompt that works better with flan-t5
+        # Flan-T5 works best with clear, concise instructions
+        prompt = f"""Context: {formatted_context}
 
-        References:
-        {formatted_context}
-        
-        Question: {question}
-        
-        Provide a detailed answer that:
-        1. Directly addresses the question
-        2. Uses information from the references
-        3. Explains concepts clearly and thoroughly
-        
-        Answer:"""
+Question: {question}
 
-        # Generate answer using LLM
-        response = self.llm.generate_response(prompt)
+Answer:"""
+
+        # Generate answer using LLM without additional system prompt wrapping
+        # Use shorter max_length to prevent the model from echoing the context
+        response = self.llm.generate_response(prompt, max_length=100, use_system_prompt=False)
 
         return response
 

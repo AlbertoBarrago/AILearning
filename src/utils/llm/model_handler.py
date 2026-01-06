@@ -6,11 +6,14 @@ import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 class LLMHandler:
-    def __init__(self, model_name="google/flan-t5-small"):
+    def __init__(self, model_name="google/flan-t5-base"):
         """
         Initialize the LLM handler with a specified model.
         Args:
             model_name (str): Name of the Hugging Face model to use
+                Recommended models:
+                - google/flan-t5-base (250M params, better quality)
+                - google/flan-t5-small (80M params, faster but lower quality)
         """
         self.model_name = model_name
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -34,23 +37,28 @@ class LLMHandler:
             print(f"Error loading model: {str(e)}")
             return False
 
-    def generate_response(self, prompt, max_length=150):
+    def generate_response(self, prompt, max_length=150, use_system_prompt=True):
         """
         Generate a response for the given prompt
         Args:
             prompt (str): Input text
             max_length (int): Maximum length of generated response
+            use_system_prompt (bool): Whether to add system prompt (set False for RAG)
         Returns:
             str: Generated response
         """
         # Enhanced system prompt for better response quality
-        system_prompt = (
-            "You are a highly knowledgeable AI assistant that provides detailed, accurate, and well-structured answers. "
-            "Your responses should be comprehensive yet clear, using examples where appropriate. "
-            "Always maintain a professional and informative tone."
-        )
-        enhanced_prompt = f"{system_prompt}\n\nQuestion: {prompt}\n\nProvide a detailed, well-organized answer with relevant examples where applicable:"
-        
+        if use_system_prompt:
+            system_prompt = (
+                "You are a highly knowledgeable AI assistant that provides detailed, accurate, and well-structured answers. "
+                "Your responses should be comprehensive yet clear, using examples where appropriate. "
+                "Always maintain a professional and informative tone."
+            )
+            enhanced_prompt = f"{system_prompt}\n\nQuestion: {prompt}\n\nProvide a detailed, well-organized answer with relevant examples where applicable:"
+        else:
+            # For RAG or pre-formatted prompts, use as-is
+            enhanced_prompt = prompt
+
         if not self.model or not self.tokenizer:
             if not self.load_model():
                 return "Error: Model not loaded"
@@ -58,17 +66,17 @@ class LLMHandler:
         try:
             inputs = self.tokenizer(enhanced_prompt, return_tensors="pt", padding=True, truncation=True).to(self.device)
             outputs = self.model.generate(
-                input_ids=inputs.input_ids, # Added input_ids
-                attention_mask=inputs.attention_mask, # Added attention mask
-                max_length=max(500, max_length),  # Further increased for more comprehensive responses
-                min_length=50,  # Ensure minimum response length
-                num_return_sequences=1, # Generate a single response
-                temperature=0.7,  # Adjusted for a better balance between creativity and coherence
-                top_p=0.95,  # Slightly increased nucleus sampling for better quality
-                top_k=50,  # Add top-k sampling for more focused responses
-                do_sample=True, # Enable sampling for more diverse responses
-                repetition_penalty=1.3,  # Increased to further prevent repetition
-                no_repeat_ngram_size=3  # Prevent repetition of 3-grams
+                input_ids=inputs.input_ids,
+                attention_mask=inputs.attention_mask,
+                max_new_tokens=max_length,  # Use max_new_tokens instead of max_length for better control
+                min_length=20,  # Reduced minimum to allow concise answers
+                num_return_sequences=1,
+                temperature=0.7,
+                top_p=0.9,  # Slightly reduced for more focused responses
+                top_k=50,
+                do_sample=True,
+                repetition_penalty=1.2,  # Reduced slightly
+                no_repeat_ngram_size=3
             )
             response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
             return response
