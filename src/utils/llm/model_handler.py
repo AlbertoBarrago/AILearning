@@ -26,7 +26,7 @@ class LLMHandler:
         Load the model and tokenizer
         """
         try:
-            self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+            AutoTokenizer.from_pretrained(self.model_name)
             self.model = AutoModelForSeq2SeqLM.from_pretrained(
                 self.model_name,
                 torch_dtype=torch.float32
