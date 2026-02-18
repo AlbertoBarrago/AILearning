@@ -19,21 +19,10 @@ The project provides hands-on experience with popular AI tools and frameworks.
 
 ## Setup
 
-1. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
-   ```
-
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   or setup.py install
-
-   ```bash
-   pip setup.py install
-   ```
+Install dependencies using [uv](https://docs.astral.sh/uv/):
+```bash
+uv sync
+```
 
 ## Learning Path
 
@@ -60,7 +49,7 @@ Check the `examples/` directory for practical demonstrations of each concept.
 
 Run unit tests:
 ```bash
-python -m unittest discover tests/
+uv run python -m unittest discover tests/
 ```
 
 ## Contributing
